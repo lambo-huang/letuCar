@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    background: #3c3631;
+    min-width: 1050px;
+    user-select: none;
+    height: 100%;
+    font-family: "微软雅黑";
+}
+.main{
+    width: 70%;
+    margin: auto;
+    box-shadow: 0px 0px 10px  #25211e;
+    padding: 20px 20px 0 20px;
+}
+.main h1{
+    color: #FF5706;
+    font-weight: normal;
+}
+.main p{
+    color: #FF5706;
+    line-height: 25px;
+}
+.letu_active{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 30px;
+}
+.imgs{
+    width: 100%;
+    display: inline-block;
+}
+.img_box{
+    width: 32.65%;
+    background: #25211e;
+    float: left;
+    margin-left: 1%;
+    margin-top: 10px;
+}
+.clear_fl{
+    margin-left: 1px;
+}
+.img_box .img{
+   padding: 0 !important;
+}
+.img_box .img img{
+    width: 100%;
+}
+.active_title{
+    color: #FF5706;
+    text-align: center;
+    margin-top: -5px;
+}
+footer{
+    margin-top: 100px;
+}

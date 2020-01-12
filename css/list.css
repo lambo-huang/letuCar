@@ -1,0 +1,175 @@
+html, body{
+    background: #3c3631;
+    min-width: 1050px;
+    user-select: none;
+    height: 100%;
+    font-family: "微软雅黑";
+}
+.main{
+    width: 70%;
+    margin: auto;
+    box-shadow: 0px 0px 10px  #25211e;
+}
+.list_title{
+    padding: 10px 0;
+    text-align: left;
+    font-size: 14px;
+    font-family: "新宋体";
+    color: #FF5706;
+}
+.prices,.brands{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.prices{
+    justify-content: flex-start;
+}
+#car_icon {
+    text-align: left;
+    color: #FFF;
+}
+#car_icon span{
+    margin: auto 0;
+}
+.brands{
+    margin-top: 10px;
+}
+#price{
+    width: 100px;
+    height: 50px;
+    color: #fff;
+    line-height: 50px;
+    cursor: pointer;
+}
+#price span{
+    margin-left: 15px;
+}
+#price:hover, #car_icon:hover{
+    color: #FF5706;
+}
+.price{
+    width: 100px;
+    height: 50px;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.price:hover{
+    background: #25211e;
+    color: #FF5706;
+}
+.brand{
+    height: 100px;
+    width: 100px;
+    display: flex;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.brand:not(#car_icon):hover{
+    background: #25211e;
+}
+.brand img{
+    margin: auto;
+}
+.cars_box{
+    width: 100%;
+}
+.car{
+    display: inline-block;
+    width: 49%;
+    height: 100%;
+    margin-top: 5px;
+    margin-left: 0.5%;
+    position: relative;
+}
+.car:hover{
+    box-shadow: 3px 3px 3px #333;
+}
+.car_img{
+    width: 75%;
+    height: 100%;
+    background: #ccc;
+    float: left;
+    overflow: hidden;
+}
+.am-slider{
+    display: inline-block;
+    float: left !important;
+}
+.am-control-thumbs li {
+    width: 20%; /* n 为轮播图数量 */
+}
+.am-slider-default{
+    margin: 0;
+}
+.am-slider-default .am-control-thumbs{
+    margin: 0;
+}
+.am-slider-default .am-control-thumbs img{
+    height: 90px;
+}
+.car_about{
+    float: right;
+    width: 25%;
+    background: #25211e;
+    color: #fff;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+.car_logo{
+    background: #000;
+    padding: 10px 0;
+}
+.car_introduce{
+    font-size: 13px;
+    line-height: 3vh;
+}
+.car_name{
+    color: #FF5706;
+    font-size: 20px;
+    padding: 5px 0;
+}
+.car_about_bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.car_price{
+    color: #FF5706;
+    font-size: 22px;
+}
+.appointment, .appointment_end{
+    background: #FF5706;
+    color: #fff;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: 700;
+}
+.select_bgcolor{
+    background: #25211e;
+    color: #FF5706;
+}
+.found_no{
+    display: flex;
+    height: 200px;
+}
+.found_no span{
+    color: #ccc;
+    margin: auto;
+    font-size: 25px;
+}
+.apt_success{
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    background: #FF5706;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}

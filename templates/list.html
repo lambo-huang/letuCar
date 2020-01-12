@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乐途汽车，乐在途中</title>
+    <link rel="stylesheet" href="/common/AmazeUI-2.7.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/css/header_footer.css">
+    <link rel="stylesheet" href="/css/list.css">
+    <script src="/js/plugin/require.js" data-main="/js/list_config"></script>
+</head>
+<body>
+<{include file = "header.html"}>
+<div class="main">
+    <input type="hidden" value="<{$vip.id}>" id="vip_id">
+    <marquee  behavior="alternate" direction="right"><div class="list_title">乐途汽车,乐在途中 欢迎选购!</div></marquee>
+    <div class="prices">
+        <a href="/list.php?sid=<{$sort_id}>"><div id="price"><span>价格：</span></div></a>
+        <a href="/list.php?price=1&sid=<{$sort_id}>">
+            <{if $price == 1}>
+                <div class="price select_bgcolor">2万以内</div>
+            <{else}>
+                <div class="price">2万以内</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=2&sid=<{$sort_id}>">
+            <{if $price == 2}>
+                <div class="price select_bgcolor">2-3万</div>
+            <{else}>
+                <div class="price">2-3万</div>
+            <{/if}>
+
+        </a>
+        <a href="/list.php?price=3&sid=<{$sort_id}>">
+            <{if $price == 3}>
+                <div class="price select_bgcolor">3-5万</div>
+            <{else}>
+            <div class="price">3-5万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=4&sid=<{$sort_id}>">
+            <{if $price == 4}>
+                <div class="price select_bgcolor">5-7万</div>
+            <{else}>
+                <div class="price">5-7万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=5&sid=<{$sort_id}>">
+            <{if $price == 5}>
+                <div class="price select_bgcolor">7-9万</div>
+            <{else}>
+                <div class="price">7-9万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=6&sid=<{$sort_id}>">
+            <{if $price == 6}>
+                <div class="price select_bgcolor">9-12万</div>
+            <{else}>
+                <div class="price">9-12万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=7&sid=<{$sort_id}>">
+            <{if $price == 7}>
+                <div class="price select_bgcolor">12-15万</div>
+            <{else}>
+                <div class="price">12-15万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=8&sid=<{$sort_id}>">
+            <{if $price == 8}>
+                <div class="price select_bgcolor">15-20万</div>
+            <{else}>
+                <div class="price">15-20万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=9&sid=<{$sort_id}>">
+            <{if $price == 9}>
+                <div class="price select_bgcolor">20-30万</div>
+            <{else}>
+                <div class="price">20-30万</div>
+            <{/if}>
+        </a>
+        <a href="/list.php?price=10&sid=<{$sort_id}>">
+            <{if $price == 10}>
+                <div class="price select_bgcolor">30万以上</div>
+            <{else}>
+                <div class="price">30万以上</div>
+            <{/if}>
+        </a>
+    </div>
+    <div class="brands">
+        <a href="/list.php?price=<{$price}>"><div class="brand" id="car_icon"><span>品牌:</span></div></a>
+        <{foreach from = $car_icon item = v}>
+        <{if $sid == $v.id}>
+            <a href="/list.php?sid=<{$v.id}>&price=<{$price}>"><div class="brand select_bgcolor"><img src="/upload/car_sort/<{$v.photo}>" height="64" width="64"></div></a>
+        <{else}>
+            <a href="/list.php?sid=<{$v.id}>&price=<{$price}>"><div class="brand"><img src="/upload/car_sort/<{$v.photo}>" height="64" width="64"></div></a>
+        <{/if}>
+        <{/foreach}>
+        <!--<a href="#"><div class="brand"><img src="/images/aodi.svg"></div></a>
+        <div class="brand"><img src="/images/baoma.svg"></div>
+        <div class="brand"><img src="/images/benchi.svg"></div>
+        <div class="brand"><img src="/images/bentian.svg"></div>
+        <div class="brand"><img src="/images/biaozhi.svg"></div>
+        <div class="brand"><img src="/images/bieke.svg"></div>
+        <div class="brand"><img src="/images/dazhong.svg"></div>
+        <div class="brand"><img src="/images/falali.svg"></div>
+        <div class="brand"><img src="/images/fengtian.svg"></div>
+        <div class="brand"><img src="/images/fute.svg"></div>
+        <div class="brand"><img src="/images/mazida.svg"></div>
+        <div class="brand"><img src="/images/xiandai.svg"></div>
+        <div class="brand"><img src="/images/xuetielong.svg"></div>
+        <div class="brand"><img src="/images/xuefulan.svg"></div>-->
+    </div>
+    <div class="cars_box">
+        <{if $cars == null}>
+            <div class="found_no"><span>未找到相关内容</span></div>
+        <{else}>
+            <{foreach from = $cars key = k item = v }>
+                <div class="car">
+                    <div class="car_img">
+                        <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"animation":"slide","controlNav":"thumbnails"}' >
+                            <ul class="am-slides">
+                                <{foreach from = $v.photos item = vv}>
+                                <li data-thumb=/upload/cars/<{$vv}>">
+                                    <img src="/upload/cars/<{$vv}>">
+                                </li>
+                                <{/foreach}>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="car_about">
+                        <div class="car_about_top">
+                            <div class="car_logo"><img src="/upload/car_sort/<{$car_icon2[$v.sort_id]}>?<{rand(0, 999)}>" ></div>
+                            <div class="car_introduce">
+                                <div class="car_name"><{$car_sort[$v.sort_id]}></div>
+                                <div>
+                                    <span class="car_age"><{$v.car_age}>年款</span>
+                                    <span class="car_stall"><{$v.car_stall}></span>
+                                </div>
+                                <div>
+                                    <span class="up_plate_year"><{$v.up_plate_time}>上牌</span>
+                                    <span class="car_all_go"><{$v.all_go}>万公里</span>
+                                </div>
+                                <!--<div><{$v.about}></div>-->
+                            </div>
+                        </div>
+                        <div class="car_about_bottom">
+                            <div class="car_price"><{$v.price}>万</div>
+                            <{if in_array($v.id, $apt_car_id)}>
+                                <div class="appointment_end" >已预约</div>
+                            <{else}>
+                                <div class="appointment" data-car-id="<{$v.id}>">立即预约</div>
+                            <{/if}>
+                        </div>
+                    </div>
+                    <div class="apt_success"><img src="/images/yes.png"><span>预约成功！</span></div>
+                </div>
+            <{/foreach}>
+        <{/if}>
+    </div>
+
+
+        <!--<div class="car">
+            <div class="car_img">
+                <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{"animation":"slide","controlNav":"thumbnails"}' >
+                    <ul class="am-slides">
+                        <li data-thumb=/images/letucar_img/fengtian1.jpg">
+                            <img src="/images/letucar_img/fengtian1.jpg">
+                        </li>
+                        <li data-thumb="/images/letucar_img/fengtian2.jpg">
+                            <img src="/images/letucar_img/fengtian2.jpg">
+                        </li>
+                        <li data-thumb="/images/letucar_img/fengtian3.jpg">
+                            <img src="/images/letucar_img/fengtian3.jpg">
+                        </li>
+                        <li data-thumb="/images/letucar_img/fengtian4.jpg">
+                            <img src="/images/letucar_img/fengtian4.jpg">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="car_about">
+                <div class="car_about_top">
+                    <div class="car_logo"><img src="/images/aodi.svg" ></div>
+                    <div class="car_introduce">
+                        <div class="car_name">奥迪</div>
+                        <div>
+                            <span class="car_age">2015款</span>
+                            <span class="car_stall">手动精英型</span>
+                        </div>
+                        <div>
+                            <span class="up_plate_year">2015.03上牌</span>
+                            <span class="car_all_go">5.5万公里</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="car_about_bottom">
+                    <div class="car_price">5.05万</div>
+                    <div class="appointment">立即预约</div>
+                </div>
+            </div-->
+</div>
+</body>
+<{include file = "footer.html"}>
+</html>

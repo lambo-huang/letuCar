@@ -1,0 +1,88 @@
+<div class="list">
+  	<h3>会员列表</h3>	 	
+    <table class="table table-hover" id="tab">
+    <thead>
+	  <tr><th>ID</th><th>用户名</th><th>头像</th><th>昵称</th><th>性别</th><th>电话</th><th>邮箱</th><th>地址</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$vip_list item=i}>
+	  <tr>
+	  	<td><{$i.id}></td>
+	  	<td><{$i.user}></td>
+	  	<td><img src="/upload/admin/<{$i.photo}>?<{rand(0,999)}>" height="50" width="80"></td>
+	  	<td><{$i.ni_name}></td>
+	    <{if $i.sex == 1}>
+		  <td>男</td>
+	    <{else}>
+		  <td>女</td>
+	    <{/if}>
+	  	<td><{$i.tel}></td>
+	  	<td><{$i.email}></td>
+	  	<td><{$i.address}></td>
+	  	<td>
+	  		<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs edit">重置密码</a>&nbsp;
+	  	</td>
+	  	</tr>
+	  	<input type="hidden" id="back_page" />
+	  <{/foreach}>
+	  	<tr id="bb">
+	   	   <td colspan="12">
+	  		<ul class="pagination pagination-sm">
+	  			<li><a href="javascript:void(0)" class="page" page-data="1">首页</a></li>
+	  			<{if $prev_page<1}>
+			   		<li><a href="javascript:void(0)">&laquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$prev_page}>">&laquo;</a></li>
+			    <{/if}>
+			    <{section name=sn loop=$all_page}>
+			    	<{if $page==$smarty.section.sn.index+1}>
+			    		<li><a href="javascript:void(0)" class="page" id="bg_color" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			    		<{else}>
+			    		<li><a href="javascript:void(0)" class="page" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			   		<{/if}>
+			    
+			    <{/section}>
+			    	<{if $next_page > $all_page}>
+			   		<li><a href="javascript:void(0)">&raquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$next_page}>">&raquo;</a></li>
+			    <{/if}>
+			    <li><a href="javascript:void(0)" class="page" page-data="<{$all_page}>">末页</a></li>
+			</ul>
+	  	  </td>
+	   </tr>
+	  </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//编辑按钮
+$('.edit').click(function(){	
+	var id = $(this).attr('data-id');
+	$.confirm({
+        title:'提示',
+        content:'确定重置密码吗？',
+        animation: 'rotateXR',
+        closeAnimation: 'rotateX',
+        confirm: function(){ 
+        	var back_page = $('#back_page').val();
+ 			$.get('/admin/reset_pwd.php',{id:id},function(data){
+			if(data==1){
+				alert('重置成功！');
+			}else{
+				alert('重置失败！');
+			}
+		});	 
+        }
+    });
+	
+});
+
+//分页
+$('.page').click(function(){
+	var page=$(this).attr('page-data');
+	$.get('vip_data.php',{page:page},function(data){
+		$('#admin_show').html(data);
+		$('#back_page').val('vip_data.php?page='+page);
+	})
+})
+</script>

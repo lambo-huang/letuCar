@@ -1,0 +1,60 @@
+<div id="form_box">
+<div class="list">
+  	<h3>管理员列表 <span id="add_user">增加管理员</span></h3>	 	
+    <table class="table table-hover" id="tab">    	
+    <thead>
+	  <tr><th>ID</th><th>用户名</th><th>头像</th><th>最后登录时间</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$admin_list item=i}>	  
+	  <tr class="tr_img">
+	  	<td><{$i.id}></td>
+	  	<td><{$i.user}></td>
+	  	<td><img src="/upload/admin/<{$i.photo}>?<{rand(0,9999)}>"/></td>
+	  	<td><{date('Y-m-d H:s',$i.stime)}></td>
+	  	<td>
+	  		<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs edit">编辑</a>&nbsp;
+	  		<a href="javascript:void(0)" del-id="<{$i.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>
+	  	</td>
+	  	</tr>
+	  <{/foreach}>
+	  
+	  </tbody>
+</table>
+</div>
+</div>
+<script type="text/javascript">
+//增加管理员
+$('#add_user').click(function(){
+	$("input:not(input[type='button'])").val('');
+	$.get('admin_form.php',function(data){
+		$('#form_box').html(data);
+	})
+});
+//编辑按钮
+$('.edit').click(function(){	
+	var id=$(this).attr('data-id');
+	$.get('admin_form.php',{id:id},function(data){
+		//dcument.write(data)
+		$("#form_box").html(data)
+	}); 
+});
+
+//删除
+$('.del').on('click', function () {	 
+	var aa=$(this).parent().parent();
+	var del_id=$(this).attr('del-id');
+    $.confirm({
+        title:'提示',
+        content:'确定删除吗？',
+        animation: 'rotateXR',
+        closeAnimation: 'rotateX',
+        confirm: function(){          
+ 			$.get('admin_post.php',{del_id:del_id},function(data){						
+			});
+			aa.remove();
+        }
+    });
+});
+
+</script>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乐途汽车，乐在途中</title>
+    <link rel="stylesheet" href="/common/AmazeUI-2.7.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/css/header_footer.css">
+    <link rel="stylesheet" href="/css/presonal_center.css">
+    <script src="/js/plugin/require.js" data-main="/js/presonal_center_config"></script>
+</head>
+<body>
+<{include file = "header.html"}>
+<div class="main">
+    <div class="aside">
+       <div class="select_bgcolor">个人资料</div>
+       <div>我的预约</div>
+    </div>
+    <div class="presonal_center">
+        <form class="presonal_data" action="/presonal_center_form_post.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<{$vip_list.id }>">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr><th>基本资料</th></tr>
+                <tr><td>头像：</td>
+                    <td>
+                        <div class="">
+                            <{if $vip_list.photo == ""}>
+                                <img src="/images/head.jpg" class="photo"/><br />
+                            <{else}>
+                                <img src="/upload/admin/<{$vip_list.photo}>?<{rand(0,999)}>" class="photo"/><br />
+                            <{/if}>
+                            <input type="file" name="photo" id="vip_head"/>
+                            <input type="hidden" name="old_photo" value="<{$vip_list.photo}>">
+                        </div>
+                    </td>
+                </tr>
+                <tr><td>用户名：</td><td><input type="text" name="user" value="<{$vip_list.user}>" /></td></tr>
+                <tr><td>性别:</td>
+                    <td>
+                        <{if $vip_list.sex == 1}>
+                            <input type="radio" name="sex" id="man" value="1" checked />&nbsp;<label for="man">男</label>&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="sex" id="woman" value="0"/>&nbsp;<label for="woman">女</label>
+                        <{else if $vip_list.sex == 0}>
+                            <input type="radio" name="sex" id="man" value="1" />&nbsp;<label for="man">男</label>&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="sex" id="woman" value="0" checked  />&nbsp;<label for="woman">女</label>
+                        <{/if}>
+                    </td>
+                </tr>
+                <tr><td>密码:</td>
+                    <td>
+                        <input type="password" name="pwd" class="pwd" /><input type="hidden" name="old_pwd" value="<{$vip_list.pwd}>">
+                    </td>
+                </tr>
+                <tr><td>确认密码:</td>
+                    <td>
+                        <input type="password" class="pwd2" />
+                    </td>
+                </tr>
+                <tr><td>手机号:</td><td><input type="text" name="tel" value="<{$vip_list.tel}>" /></td></tr>
+                <tr><td>地址：</td>
+                    <td>
+                        <select id="s_province" name="pp">
+                            <option value="">--选择省--</option></select>
+                        <select id="s_city" name="cc">
+                            <option value="">--选择市--</option></select>
+                        <select id="s_county" name="aa">
+                            <option value="">--选择区--</option></select>
+                    </td>
+                </tr>
+                <tr><td>邮箱:</td><td><input type="text" name="email" value="<{$vip_list.email}>" /></td></tr>
+                <tr><td>详细地址:</td><td><textarea name="address" id="address"><{$vip_list.address}></textarea></td></tr>
+                <tr><td></td><td><input type="submit" value="保存" id="btn_save" /></td></tr>
+            </table>
+        </form>
+        <div class="goods_list">
+            <table>
+                <tr><th>我的预约</th></tr>
+                <tr><td>商品</td><td>型号</td><td>价格</td><td>操作</td></tr>
+                <{foreach from = $goods_list item = v}>
+                <tr>
+                    <td>
+                        <img src="/upload/cars/<{$v.photos}>?<{rand(0,999)}>" class="td_fl">
+                        <div class="td_fr">
+                            <h5><{$sort_name[$v.sort_id]}></h5>
+                            <p><{$v.about}></p>
+                        </div>
+                    </td>
+                    <td><{$v.car_type}></td>
+                    <td><{$v.price}>万</td>
+                    <td class="del_list"><a href="/presonal_center_form_post.php?car_id=<{$v.id}>">删除</a></td>
+                </tr>
+                <{/foreach}>
+
+                <!--<tr>
+                    <td>
+                        <img src="/images/letucar_img/fengtian1.jpg" class="td_fl">
+                        <div class="td_fr">
+                            <h5>丰田</h5>
+                            <p>2016款 手动精英型 2016.03上牌 1.5万公里</p>
+                        </div>
+                    </td>
+                    <td>X5</td>
+                    <td>5.05万</td>
+                    <td class="del_list">删除</td>
+                </tr>-->
+            </table>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<{include file = "footer.html"}>
+</body>
+</html>

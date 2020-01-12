@@ -1,0 +1,166 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: "微软雅黑";
+}
+ul li{
+	list-style: none ;
+}
+input{
+	outline: none;
+}
+.clear{
+	clear: both;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+header,footer{
+	width: 100%;
+	background: #25211e;
+}
+.head, .foot{
+	width: 70%;
+	margin: auto;
+	overflow: hidden;
+}
+
+/*头部样式*/
+.head{
+	display: flex;
+	justify-content: space-between;
+}
+.head_fl{
+	margin: auto 0;
+	flex-grow: 1;
+}
+.logo img{
+	height: 60px;
+	width: 130px;
+}
+.head_fm{
+	margin: auto 0;
+	flex-grow: 6;
+}
+.head_fm li{
+	float: left;
+	padding: 15px;
+}
+.head_fm li:hover{
+	background: #3c3631;
+}
+.head_fm li:hover a{
+	color: #FF5706;
+}
+.head_fr{
+	float: right;
+	margin: auto 0;
+	flex-grow: 0 ;
+}
+.head_fr a{
+	color: #ccc;
+}
+.head_fr li{
+	float: left;
+	font-size: 13px;
+	margin-left: 10px;
+}
+.head_fr li:hover a{
+	color: #fff;
+}
+
+/*底部样式*/
+footer{
+	cursor: pointer;
+	padding: 20px 0;
+}
+.foot{
+	font-size: 13px;
+	color: #FF5706;
+}
+.foot table a{
+	color: #FF5706;
+}
+.slogan{
+	font-size: 22px;
+	font-family: "叶根友毛笔行书2.0版";
+	color: #FF5706;
+}
+.body{
+    height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(94,94,94,0.7);
+	z-index: 999;
+	display: none;
+}
+.reg_login_box{
+	margin: auto;
+	background: #fff;
+	padding: 5px;
+	border-top: 3px solid #FF5706;
+}
+.close{
+	float: right;
+	cursor: pointer;
+}
+.reg_login_box table{
+	margin: 20px 80px;
+	line-height: 7vh;
+}
+.reg_login_box table input{
+	padding: 5px;
+	font-size: 13px;
+	width: 20vw;
+}
+.code{
+	width: 10vw !important;
+}
+.code_img{
+	margin-left: 5px;
+	height: 30px;
+	cursor: pointer;
+}
+.reg_login_box table input:not([type=submit]):focus{
+	border: 1px solid #FF5706;
+}
+.reg_login_box table input[type=submit]{
+	border: 1px solid #FF5706;
+	background: #FF5706;
+	color: #fff;
+}
+.reg_error, .login_error{
+	color: red;
+	line-height: 0;
+}
+.a_link{
+	text-align: right;
+	color: #000;
+	font-size: 12px;
+	cursor: pointer;
+}
+.a_link:hover{
+	color: #FF5706;
+}
+.user{
+	position: relative;
+	color: #FF5706;
+}
+#exit{
+	width: 30px;
+	color: #fff;
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+	cursor: pointer;
+	display: none;
+}
+.user:hover #exit{
+	display: block;
+}
+.click_reg{
+	cursor: pointer;
+}

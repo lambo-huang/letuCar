@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>乐途汽车，乐在途中</title>
+    <link rel="stylesheet" href="/common/AmazeUI-2.7.2/assets/css/amazeui.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/header_footer.css"/>
+	<script src="/js/plugin/require.js" data-main="/js/index_config"></script>
+</head>
+<body onselectstart="return false">
+<{include file='header.html'}>
+<div class="am-slider am-slider-default" data-am-flexslider="{playAfterPaused: 8000}">
+    <ul class="am-slides">
+        <{foreach from = $lunbo_imgs item = v}>
+            <li><img src="/upload/ad_list/<{$v.photo}>?<{rand(0,999)}>" /></li>
+        <{/foreach}>
+        <!--<li><img src="/images/letu_active/img2.png" /></li>
+        <li><img src="/images/letu_active/img1.png" /></li>
+        <li><img src="/images/letu_active/img3.png" /></li>
+        <li><img src="/images/letu_active/img4.png" /></li>-->
+    </ul>
+</div>
+<div class="all_div">
+    <form action="/list.php" class="search_form" method="get">
+        <input type="hidden" id="sort_id" name="sort_id">
+        <input type="search" class="car_name" placeholder="请输入汽车品牌"><input type="submit" value="搜索">
+        <div></div>
+        <ul class="key_word"></ul>
+        <span id="btn_rand">换一换</span>
+    </form>
+</div>
+
+<{include file='footer.html'}>
+</body>
+</html>

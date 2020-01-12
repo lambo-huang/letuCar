@@ -1,0 +1,134 @@
+<div id="list_box">
+<div class="list">
+  	<h3>广告列表 <span id="add_user">增加</span></h3>	 	
+    <table class="table table-hover" id="tab">    	
+    <thead>
+	  <tr><th>ID</th><th>广告位</th><th>广告位ID</th><th>广告位介绍</th><th>图片</th><th>排序</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$ad_list1 item=i}>
+	  <tr>
+	  	<td><{$i.id}></td>
+	  	<td class="sort1"><{$i.name}></td>
+	  	<td><{$i.pid}></td>
+	  	<td><{$i.about}></td>
+	  	<td>
+	  		<!--<{if $i.photo!=""}>
+	  			<img src="upload/ad_list/<{$i.photo}>?<{rand(0,999)}>" class="img">
+	  		<{else}>
+	  			<span></span>
+	  		<{/if}>-->
+	  	</td>
+	  	<td><{$i.ord}></td>
+	  	<td>
+	  		<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs edit">编辑</a>&nbsp;
+	  		<!--<a href="javascript:void(0)" del-id="<{$i.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>-->
+	  	</td>
+	  	</tr>
+	  	<input type="hidden"  id="back_page"/>
+	  		<{foreach from=$ad_list item=j}>
+	  			<{if $j.pid==$i.id}>
+	  				<tr>
+					  	<td><{$j.id}></td>
+					  	<td class="sort2"><{$j.name}></td>
+						<td><{$j.pid}></td>
+					  	<td><{$j.about}></td>
+					  	<td><img src="/upload/ad_list/<{$j.photo}>?<{rand(0,999)}>" id="111" class="img"></td>
+					  	<td><{$j.ord}></td>
+					  	<td>
+					  		<a href="javascript:void(0)" data-id="<{$j.id}>" class="btn btn-info btn-xs edit">编辑</a>&nbsp;
+					  		<a href="javascript:void(0)" del-id="<{$j.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>
+					  	</td>
+					  </tr>
+	  			<{/if}>
+	  		<{/foreach}>
+	  <{/foreach}>
+	  <tr id="bb">
+	   	   <td colspan="12">
+	  		<ul class="pagination pagination-sm">
+	  			<li><a href="javascript:void(0)" class="page" page-data="1">首页</a></li>
+	  			<{if $prev_page<1}>
+			   		<li><a href="javascript:void(0)">&laquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$prev_page}>">&laquo;</a></li>
+			    <{/if}>
+			    <{section name=sn loop=$all_page}>
+			    	<{if $page==$smarty.section.sn.index+1}>
+			    		<li><a href="javascript:void(0)" class="page" id="bg_color" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			    		<{else}>
+			    		<li><a href="javascript:void(0)" class="page" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			   		<{/if}>
+			    
+			    <{/section}>
+			    	<{if $next_page > $all_page}>
+			   		<li><a href="javascript:void(0)">&raquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$next_page}>">&raquo;</a></li>
+			    <{/if}>
+			    <li><a href="javascript:void(0)" class="page" page-data="<{$all_page}>">末页</a></li>
+			</ul>
+	  	  </td>
+	   </tr>
+	  </tbody>
+</table>
+</div>
+</div>
+<script type="text/javascript">
+//编辑按钮
+$('.edit').click(function(){	
+	var ed_id=$(this).attr('data-id');
+	$.get('ad_list_form.php',{ed_id:ed_id},function(data){
+		//alert(data)
+		$('#list_box').html(data);
+	});
+});
+
+//增加
+$('#add_user').click(function(){
+	$("input:not(input[type='button'])").val('');
+	$.get('ad_list_form.php',function(data){		
+		$('#list_box').html(data);
+	})
+});
+
+//分页
+$('.page').click(function(){
+	var page=$(this).attr('page-data');
+	$.get('ad_list.php',{page:page},function(data){		
+		$('#admin_show').html(data);
+		$('#back_page').val('ad_list.php?page='+page);
+	})
+})
+
+//删除
+$('.del').on('click', function () {	 
+var aa=$(this).parent().parent();
+var del_id=$(this).attr('del-id');
+$.confirm({
+    title:'提示',
+    content:'确定删除吗？',
+    animation: 'rotateXR',
+    closeAnimation: 'rotateX',
+    confirm: function(){  
+		$.get('ad_list_post.php',{del_id:del_id},function(data){	
+			if(data==2){
+				alert('不能删除该广告位！！');    			
+			}else if(data==1){
+				var back_page=$('#back_page').val();
+				$.get(back_page,function(data){
+      				$('#admin_show').html(data);
+      				aa.remove();
+      			});
+			}else{
+				alert('失败！');	
+				aa.remove();
+			}
+		});
+		
+    }
+});
+});
+
+
+
+</script>

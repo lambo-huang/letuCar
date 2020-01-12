@@ -1,0 +1,92 @@
+<div class="list_box">
+<div class="list">
+  	<h3>会员预约列表</h3>
+    <table class="table table-hover">    	
+    <thead>
+	  <tr><th>ID</th><th>用户名</th><th>汽车品牌</th><th>预约单号</th><th>预约时间</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$vip_order item=i}>
+	  <tr>
+	  	<td><{$i.id}></td>
+	  	<td><{$vip_name[$i.user_id]}></td>
+	    <td><{$sort_name[$i.car_id]}></td>
+	  	<td><{$i.apt_num}></td>
+	  	<td><{date('Y-m-d H:s',$i.apt_time)}></td>
+	    <td>
+		  <a href="javascript:void(0)" del-id="<{$i.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>
+	    </td>
+	  	</tr>
+	  <{/foreach}>
+	  	
+	  <tr id="bb">
+	   	   <td colspan="12">
+	  		<ul class="pagination pagination-sm">
+	  			<li><a href="javascript:void(0)" class="page" page-data="1">首页</a></li>
+	  			<{if $prev_page<1}>
+			   		<li><a href="javascript:void(0)">&laquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$prev_page}>">&laquo;</a></li>
+			    <{/if}>
+			    <{section name=sn loop=$all_page}>
+			    	<{if $page==$smarty.section.sn.index+1}>
+			    		<li><a href="javascript:void(0)" class="page" id="bg_color" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			    		<{else}>
+			    		<li><a href="javascript:void(0)" class="page" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			   		<{/if}>
+			    
+			    <{/section}>
+			    	<{if $next_page > $all_page}>
+			   		<li><a href="javascript:void(0)">&raquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$next_page}>">&raquo;</a></li>
+			    <{/if}>
+			    <li><a href="javascript:void(0)" class="page" page-data="<{$all_page}>">末页</a></li>
+			</ul>
+	  	  </td>
+	   </tr>
+	  </tbody>
+	  <input type="hidden" id="back_page"/>
+</table>
+</div>
+</div>
+<script type="text/javascript">
+//分页
+$('.page').click(function(){
+	var page=$(this).attr('page-data');
+	//alert(page);
+	$.get('vip_order.php',{page:page},function(data){		
+		$('#admin_show').html(data);
+		$('#back_page').val('vip_order.php?page='+page);
+		
+	})
+})
+
+var back_page=$('#back_page').val();
+$(".del").click(function () {
+    var p = $(this).parent().parent();
+    var id = $(this).attr("del-id");
+    $.confirm({
+        title:'提示',
+        content:'确定重置密码吗？',
+        animation: 'rotateXR',
+        closeAnimation: 'rotateX',
+        confirm: function(){
+            $.get("/admin/vip_apt_list_del.php", {id: id}, function (data) {
+                if(data == 1){
+                    p.remove();
+                    $.get(back_page, function (data) {
+                        $("#form_box").html(data);
+                    })
+				}
+            })
+        }
+    });
+
+
+})
+
+
+
+
+</script>

@@ -1,0 +1,254 @@
+html, body{
+	margin:0;
+	height:100%;
+}
+*{
+	padding: 0;
+	margin: 0;
+}
+.container-fluid{
+	padding-right:0px; 
+    padding-left:0px; 
+}
+.mian_box{
+	position: relative;
+}
+.sidebar{
+	width:270px;
+	position: relative !important;
+	height: 100%;
+}
+.row{
+	margin-right: 0px;
+}
+.row1{
+	background:#333333;
+	padding: 10px 5px;
+	height: 70px;
+}
+.ad_top{
+	color: #fff;
+}
+#top_ad{
+	display: inline-block;
+	margin-top:15px;
+}
+.aside_fl{
+	height: 917px;
+	display: inline-block;
+	float: left;
+}
+.list{
+	width: 80%;
+	height:917px;
+	padding-right:80px;
+	overflow-y: scroll;
+	min-width: 950px;
+}
+::-webkit-scrollbar{
+	width: 0;
+}
+ .table>tbody>tr>td{
+ 	border-top:none ;
+ 	border-bottom: 1px solid #ddd;
+ }
+ .table>tbody>tr:last-child td{
+ 	border-bottom: 1px solid #ddd;
+ }
+.table>tbody>tr:last-child:hover td{
+ 	background: #fff;
+ }
+ .form{
+ 	line-height:50px;
+ 	position: absolute;
+ 	transform: rotateX(90deg);
+ 	transition:transform 0.5s ;	
+ }
+.list{
+	position: absolute;
+	transform: rotateX(0deg);
+	transition:transform 0.5s ;
+}
+.list table tr th,td{
+	text-align: center;
+}
+.list h3,.form h3{
+	border-bottom:2px solid #5BC0DE;
+	padding-bottom:10px;
+} 
+.list table,.form table{
+	margin-top:25px;
+}
+.head_img{
+	height: 50px;
+	width: 50px;
+	border-radius: 50px;
+	margin-right:10px;
+}
+#add_user{
+	font-size: 13px;
+	color:#5BC0DE;
+	cursor: pointer;
+}
+#file,#photos{
+	border: none;
+	outline: none;
+}
+.huan{
+	font-size:30px ;
+	margin: 200px 300px;
+	color: #00BFF0;
+}
+.sort1{
+	font-weight: 700;
+	font-size: 17px;
+}
+.sort2{
+	color: #666;
+	font-size: 12px;
+}
+.ed_sort{
+	margin-top: 30px;
+	font-size: 14px;
+}
+.ed_sort select,input{
+	border-radius: 3px;
+	outline: none;
+	border: 1px solid #ccc;
+	padding: 2px 5px;
+}
+.ed_sort table tr td{
+	padding: 5px 0;
+}
+.edit_tab tr td:first-child{
+	text-align: right;
+}
+.edit_tab tr td:nth-child(2){
+	text-align: left;
+}
+.car_ico{
+	display: none;
+}
+
+#order{
+	width:60px;
+}
+#btn{
+	color: #fff;
+	background: #222222;
+}
+.sdel td{
+	color:#ccc;
+}
+.num{
+	width:80px;
+	display: inline-block;	
+}
+.txt_left{
+	text-align: left;
+	padding-left:2px ;
+}
+#noz{
+	transform: rotateX(0deg);
+}
+#photos{
+
+}
+#bb td{
+	border: none;
+}
+#bg_color{
+	background: #000000;
+	color: #fff;
+}
+.bton{
+	background: green;
+	color: #fff;
+	padding:4px 6px;
+	font-size: 12px;
+	border-radius: 3px;
+}
+.mdd{
+	position:relative;
+	height: 45px;
+}
+.mdd .pp,.pdel{
+	float: left;
+}
+.pdel{
+	display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    top:0px;
+    right:0px;
+    font-size: 13px;
+    color:#666;
+}
+.bb{
+	margin-bottom:10px;
+}
+.gg{
+	color:green;
+	font-weight: bold;
+}
+.imgs img{
+	display: inline-block;
+	height: 80px;
+	width: 100px;
+}
+.mar_bot{
+	margin-bottom: 10px;
+}
+.img{
+	width: 80px;
+	height:50px;
+}
+#tab tr td{
+	line-height: 50px;
+}
+.ed_img{
+	width: 150px;
+	height: 100px;
+}
+.tr_img img{
+	height: 50px;
+	width: 80px;
+}
+.goods_photo{
+	display: inline-block;
+	border: 1px solid #ddd;
+}
+.goods_photo figcaption{
+	text-align: center;
+}
+#sname{
+	width: 200px;
+}
+#admin_show{
+	float: left;
+	margin-left: 30px;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+	margin: 0;
+	padding: 0;
+}
+.txt_fl{
+	text-align: left !important;
+}
+.jconfirm-box{
+	position: fixed !important;
+	top: 0;
+	left: 45%;
+	width: 350px !important;
+}
+.jconfirm-scrollpane .container .jconfirm-box-container .content-pane .content{
+	clip: auto !important;
+}
+
+/*汽车分类*/
+#car_photo{
+	width: 150px;
+}
+.sort_tab tr td{
+	line-height: 73px !important;
+}

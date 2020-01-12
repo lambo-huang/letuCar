@@ -1,0 +1,64 @@
+<div class="form" id="noz">	
+<h3>增加/编辑</h3>
+<form id="myform" enctype="multipart/form-data">
+ <table>
+	<input type="hidden" name="hid" id="hid" value="<{$ed_list.id}>" />
+	<tr><td>广告：</td>
+		<td class="txt_left">			
+			<select name="pid" id="sel1">
+				<option value="0">广告位</option>
+				<{foreach from=$t_list item=i}>
+					<{if $i.id==$ed_list.pid}>
+						<option value="<{$i.id}>" selected><{$i.name}></option>
+					<{else}>
+						<option value="<{$i.id}>"><{$i.name}></option>
+					<{/if}>
+				<{/foreach}>
+			</select>
+	</tr>
+	<tr><td>名称：</td><td><input type="text" class="form-control" name="name" value="<{$ed_list.name}>"></td></tr>
+    <tr><td>介绍：</td><td><textarea class="form-control mar_bot" name="about"><{$ed_list.about}></textarea></td></tr>
+    <tr><td>图片：</td>
+    	<td class="txt_left">   		
+			<input type="file" class="form-control bb" name="photo" id="photos">
+			<{if $ed_list.id !=''}>
+			<img src="/upload/ad_list/<{$ed_list.photo}>?<{rand(0,9999)}>" class="ed_img">
+			<{/if}>
+			<input type="hidden" class="form-control bb" name="old_photo" value="<{$ed_list.photo}>">   
+    	</td>
+    </tr>
+    </tr>
+    <tr><td>排序：</td><td><input type="number" class="form-control" name="ord" value="<{$ed_list.ord}>"></td></tr>
+    <tr><td></td><td><input type="button" value="保存" class="btn btn-success btn-xs"/>&nbsp;<input type="button" value="返回" id="return" class="btn btn-inverse btn-xs"/></td></tr>
+ </table>
+</form>
+</div>
+
+<script type="text/javascript">
+//保存
+$('.btn-success').click(function(){
+	 $("#myform").ajaxSubmit({
+        url:"ad_list_post.php",
+        type:"POST",
+        success:function(data){
+        	//document.write(data);
+          if(data==1){
+          	$.get('ad_list.php',function(data){
+          		$('#list_box').html(data);	
+          	});
+          }else{
+          	alert('失败！');
+          }
+        },
+        error:function(msg){
+          alert("error:"+msg);
+        }
+     });
+});
+//返回按钮
+$('#return').click(function(){
+	$.get('ad_list.php',function(data){
+      $('#admin_show').html(data);	
+    });
+});
+</script>

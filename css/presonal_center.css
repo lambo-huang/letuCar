@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    background: #3c3631;
+    min-width: 1050px;
+    user-select: none;
+    height: 100%;
+    font-family: "微软雅黑";
+}
+ul li{
+    list-style: none;
+}
+.main{
+    width: 70%;
+    margin: auto;
+    box-shadow: 0px 0px 10px  #25211e;
+    margin-top: 30px;
+    overflow: hidden;
+}
+.aside{
+    display: inline-block;
+    width: 15%;
+    height: 100%;
+    background: #25211e;
+    padding:  20px 0;
+    float: left;
+}
+.aside div{
+    text-align: center;
+    padding: 10px 0;
+    color: #aaa;
+    cursor: pointer;
+}
+.aside div:hover{
+    background: #000;
+    color: #fff;
+}
+.select_bgcolor{
+    background: #000;
+    color: #fff;
+}
+.presonal_center{
+    float: left;
+    margin-left: 30px;
+}
+.presonal_center form{
+    color: #FF5706;
+    background: #25211e;
+    width: 100%;
+    padding: 10px 30px;
+
+}
+.presonal_center form table{
+    line-height: 35px;
+}
+.presonal_center form table tr td{
+    padding: 10px 20px;
+}
+.presonal_center form input,textarea{
+    border: none;
+    width: 15vw;
+    height: 3.5vh;
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+.presonal_center form input[type=radio]{
+    width: 5vw;
+    height: 2vh;
+    padding: 3px 0;
+}
+.presonal_center form select{
+    width: 4.85vw;
+}
+.photo{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+#vip_head{
+    padding: 0;
+    margin-top: 10px;
+}
+#man, #woman, label{
+    vertical-align: middle;
+}
+#address{
+    height: 10vh;
+}
+.goods_list{
+    background: #25211e;
+    padding: 10px 30px;
+    color: #FF5706;
+    display: none;
+}
+.goods_list table tr th{
+    padding-bottom: 20px;
+}
+.goods_list table tr td{
+    padding: 10px;
+}
+.goods_list table tr:nth-child(2) td{
+    text-align: center;
+    border-bottom: 1px solid #c9cccf;
+}
+.goods_list tr td{
+    padding: 10px;
+    border-bottom: 1px solid #666;
+}
+.td_fl{
+    width: 150px;
+    height: 100px;
+    float: left;
+}
+.td_fr{
+    float: left;
+    margin-left: 10px;
+}
+footer{
+    margin-top: 30px;
+}
+.del_list{
+    cursor: pointer;
+}

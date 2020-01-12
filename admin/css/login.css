@@ -1,0 +1,27 @@
+.animated{
+	width: 100%;
+	background: url(../img/bg4.jpg) no-repeat;
+	background-size: 100%;
+}
+.container{
+	width: 800px;
+	margin: auto;
+	margin-top: 200px;
+}
+input{
+	outline:none;
+}
+.form-horizontal{
+	background:rgba(149,149,149,0.5);
+	padding: 20px 0px;
+}
+#code{
+	width: 80px;
+	float: left;
+}
+#code_img{
+	height:33px;
+	width: 80px;
+	float: left;
+	margin-left: 15px;
+}

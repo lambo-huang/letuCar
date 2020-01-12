@@ -1,0 +1,47 @@
+<header>
+	<div class="head">
+		<div class="head_fl">
+			<a href="/index.php" class="logo"><img src="/images/logo.png"></a>
+		</div>
+		<ul class="head_fm"> 
+			<li><a href="/index.php">首页</a></li>
+			<li><a href="/list.php">精品选购</a></li>
+			<li><a href="/about_us.php">关于我们</a></li>
+		</ul>
+		<ul class="head_fr">
+			<{if $vip_user != ''}>
+			<li class="user"><a href="javascript:void(0)"><{$vip_user}></a>，欢迎来到乐途汽车<a href="/vip_loginOut.php" target="_parent" id="exit">退出</a></li>
+			<li><a href="/presonal_center.php" class="reg">个人中心</a></li>
+			<{else}>
+			<li><a href="javascript:void(0)" class="login">登录</a></li>
+			<li><a class="click_reg">注册</a></li>
+			<{/if}>
+		</ul>
+	</div>	
+</header>
+<div class="body">
+	<div class="reg_login_box" data-box-id="reg_login_box">
+		<span class="slogan">乐途汽车欢迎您！</span><img src="/images/close.svg" class="close">
+		<div class="clear"></div>
+		<form id="login_form">
+		<table class="login_tab">
+			<tr><td class="login_error"></td></tr>
+			<tr><td><input type="text" placeholder="请输入用户名/手机号" name="user" ></td></tr>
+			<tr><td><input type="password" placeholder="密码" name="pwd"></td></tr>
+			<tr><td><input type="text" class="code" name="code"><img class="code_img" src="/code.php?Math.random()"></td></tr>
+			<tr><td><input type="submit" value="登录" id="vip_login"></td></tr>
+			<tr><td class="a_link go_reg">还没有账号，去注册</td></tr>
+		</table>
+		</form>
+		<form id="reg_form" method="post">
+		<table class="reg_tab">
+			<tr><td class="reg_error"></td></tr>
+			<tr><td><input type="text" placeholder="请输入用户名" name="name" id="name" pattern="^[\u0391-\uFFE5_a-zA-Z0-9-]{3,16}$" title="3~16个字符，支持中英文、数字、减号或下划线"></td></tr>
+			<tr><td><input type="password" placeholder="密码" name="pwd" id="pwd" pattern="^[A-Za-z0-9]{6,20}$" title="6-20 位，字母、数字密码"></td></tr>
+			<tr><td><input type="password" placeholder="确认密码" id="pwd2"></td></tr>
+			<tr><td><input type="submit" value="注册" id="res_submit"></td></tr>
+			<tr><td class="a_link go_login">已有账号，去登录</td></tr>
+		</table>
+		</form>
+	</div>
+</div>

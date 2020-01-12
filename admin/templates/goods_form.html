@@ -1,0 +1,142 @@
+<div class="form animated fadeInUp" id="noz">	
+<h3>增加/编辑</h3>
+<form  method="post" enctype="multipart/form-data" id="myform">
+<div class="ed_sort">
+	汽车品牌：<select name="sort_id" id="ssel" onchange="fun(this.value)">
+  				<option value="0">汽车品牌</option>
+	  			<{foreach from = $sort_list item=v}>
+	  				<{if $v.id==$ed_list.sort_id}>
+	  					<option value="<{$v.id}>" selected><{$v.name}></option> 					
+	  				<{else}>
+	 					<option value="<{$v.id}>"><{$v.name}></option>
+	  				<{/if}>
+	  			<{/foreach}>
+  			</select>&nbsp;&nbsp;
+  </div>
+
+ <table>
+	<input type="hidden" name="hid" id="hid" value="<{$ed_list.id}>" />
+	<tr><td>车型：</td><td><input type="text" class="form-control" id="car_type" name="car_type" value="<{$ed_list.car_type}>"></td></tr>
+	<tr><td>车龄：</td>
+		<td class="txt_fl">
+			<input type="number" min="0" class="form-control num" id="car_age" name="car_age" value="<{$ed_list.car_age}>">
+		</td>
+	</tr>
+    <tr><td>总行程：</td>
+		<td class="txt_fl">
+			<input type="number" min="0" class="form-control num" id="all_go" name="all_go" value="<{$ed_list.all_go}>">
+		</td>
+	</tr>
+	 <tr><td>档型：</td><td><input type="text" class="form-control" id="car_stall" name="car_stall" value="<{$ed_list.car_stall}>"></td></tr>
+    <tr><td>上牌时间：</td><td><input type="text" class="form-control" id="up_plate_time" name="up_plate_time" value="<{$ed_list.up_plate_time}>"></td></tr>
+	 <tr><td>价格：</td>
+		 <td class="txt_fl">
+			 <input type="number" min="0" class="form-control num" id="price" name="price" value="<{$ed_list.price}>">
+		 </td>
+	 </tr>
+	 <tr><td>简介：</td>
+		 <td style="text-align: left">
+			 <textarea class="ckeditor" id="about" name="about" rows="3" cols="50"><{$ed_list.about}></textarea>
+		 </td>
+	 </tr>
+	 <tr><td>图片：</td>
+		 <td class="txt_left">
+			 <p><button class="btn btn-md" id="padd">增加</button></p>
+			 <{if $ed_list.id!=""}>
+			 <{foreach from=$photos item=i key=key}>
+			 <figure class="goods_photo">
+				 <img src="/upload/cars/<{$i}>?<{rand(1,9999)}>" class="ed_img"/><br />
+				 <input type="hidden" name="old_photos[]" value="<{$i}>" />
+				 <figcaption><span class="btn btn-md del_photo" data-url="<{$key}>" >删除</span></figcaption>
+			 </figure>
+			 <{/foreach}>
+			 <{/if}>
+			 <input type="file" class="form-control bb" name="photos[]" id="photos">
+			 <div id="photos_box"></div>
+		 </td>
+	 </tr>
+    <tr><td></td>
+    	<td><input type="button" value="保存" class="btn btn-success btn-xs"/>&nbsp;
+    		<input type="button" value="返回" id="return" class="btn btn-inverse btn-xs"/>
+    	</td>
+    </tr>
+ </table>	
+</form>
+</div>
+<script type="text/javascript">
+//编辑/增肌一、二级分类
+function fun(sid){
+	$('#ssel2').html("");
+	var url='goods_post.php?sid='+sid; 
+	$.get(url,function(data){
+		var data=eval('('+data+')');
+		for(n in data){
+			var ht=$('#ssel2').html();
+			var name=data[n]['name'];
+			var id=data[n]['id'];
+			$('#ssel2').html(ht+"<option value="+id+">"+name+"</option>");
+		};
+	});
+};
+//返回按钮
+$('#return').click(function(){
+	$.get('goods.php',function(data){
+		$('#admin_show').html(data);
+	})
+});
+
+//图片动态增删
+$('#padd').click(function(){
+	$('#photos_box').before('<div class="mdd"><input type="file" class="form-control pp" id="photos" name="photos[]">&nbsp;<button class="btn btn-md pdel">删除</button></div>')
+	return false;
+})
+setInterval(function(){
+		$('.pdel').click(function(){
+			$(this).parent().remove();
+		});
+},100);
+
+
+//保存
+$('.btn-success').click(function(){	
+$("#myform").ajaxSubmit({
+url:"goods_post.php",
+type:"POST",
+success:function(data){
+	//document.write(data);
+     if(data==1){
+		$.get('goods.php',function(data){
+			$('#admin_show').html(data);
+			})
+	}else{
+		alert('增加失败！');
+		return false;
+	}
+},
+error:function(msg){
+  alert("error:"+msg);
+    }
+ });
+
+});
+
+//图片删除
+
+$('.del_photo').click(function(){
+	var id =<{$ed_list.id}>;
+	var index=$(this).attr('data-url');
+	var fig=$(this).parent().parent();
+	$.get('photo_delete.php',{id:id,index:index},function(data){
+		if(data==1){
+			fig.remove();
+		}else{
+			return false;
+		}
+				
+	})
+	return false;
+})
+
+
+
+</script>

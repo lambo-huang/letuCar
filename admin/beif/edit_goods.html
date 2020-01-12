@@ -1,0 +1,117 @@
+<div class="form" id="noz">	
+<h3>增加/编辑</h3>
+<div class="ed_sort">
+	顶级分类：<select name="sid" id="ssel" onchange="fun2(this.value)">
+  			<option value="0">顶级分类</option>
+  			<{foreach from = $tsl item=v}>
+  				<{if $v.id==$ed_list.sort_id}>
+  					<option value="<{$ed_list.id}>" selected><{$sort_goods[$ed_list.sort_id]}></option>
+  				<{else}>
+ 					<option value="<{$v.id}>"><{$v.name}></option>
+  				<{/if}>
+  			<{/foreach}>
+  		</select>&nbsp;&nbsp;
+  	二级分类：<select name="sid2" id="ssel2">
+  				<option value="<{$ed_list.sort_id2}>"><{$sort_goods[$ed_list.sort_id2]}></option>
+  			 </select>
+  	</div>
+ <table>
+ 	<form id="edit">	
+ 		<input type="hidden" name="hid" id="hid" value="<{$ed_list.id}>" />
+  		<tr><td>标题：</td><td><input type="text" class="form-control" id="title" value="<{$ed_list.title}>"></td></tr>
+  		<tr><td>商品介绍：</td><td><textarea name="about" rows="" cols="" class="form-control" id="about"><{$ed_list.about}></textarea></td></tr>
+  	    <tr><td>价格：</td><td><input type="text" class="form-control" id="price" value="<{$ed_list.price}>"></td></tr>
+  	    <tr><td>图片：</td><td><input type="file" class="form-control" id="photos" value="<{$ed_list.photos}>"></td></tr>
+  	    <tr><td>库存 / 销量：</td><td class="txt_left"><input type="number" class="form-control num" id="have_num" value="<{$ed_list.have_num}>">&nbsp;<input type="number" class="form-control num" id="sale_num" value="<{$ed_list.sale_num}>"></td></tr>
+  	    <tr><td>交易时间：</td><td><input type="text" class="form-control" id="send_time" value="<{$ed_list.send_time}>"></td></tr>
+  	    <tr><td>商品选项：</td>
+  	    	<td class="txt_left ">
+  	    		项目<input type="text" class="form-control num s1">&nbsp;价格<input type="text" class="form-control num s2">&nbsp;<button class="btn btn-md" id="tadd">增加</button>
+  	    		<div class="add_del"></div>
+  	    	</td>
+  	    </tr>
+  	    <tr><td>商品标号：</td><td><input type="text" class="form-control" id="goods_code" value="<{$ed_list.goods_code}>"></td></tr>
+  	    <tr><td>打折：</td><td><input type="text" class="form-control" id="discount" value="<{$ed_list.discount}>"></td></tr>
+  	    <tr><td>收藏 / 评论：</td><td class="txt_left"><input type="number" class="form-control num" id="collect_num" value="<{$ed_list.collect_num}>">&nbsp;<input type="number" class="form-control num" id="ping_num" value="<{$ed_list.ping_num}>"></td></tr> 
+  	    <tr><td></td><td><input type="button" value="保存" class="btn btn-success btn-xs"/>&nbsp;<input type="button" value="返回" id="return" class="btn btn-inverse btn-xs"/></td></tr>
+ 	</form>
+ 	
+</table>
+
+</div>
+<script type="text/javascript">
+//编辑/增肌一、二级分类
+function fun2(sid){
+	$('#ssel2').html("")
+	var url='goods_post.php?sid='+sid; 
+	$.get(url,function(data){
+		var data=eval('('+data+')');
+		for(n in data){
+			var ht=$('#ssel2').html();
+			var name=data[n]['name'];
+			var id=data[n]['id'];
+			console.log($(this))
+			$('#ssel2').html(ht+"<option value="+id+">"+name+"</option>");
+		};
+	});
+};
+//返回按钮
+$('#return').click(function(){
+	$.get('goods.php',function(data){
+		$('#admin_show').html(data);
+	})
+});
+//选项动态增删
+$('#tadd').click(function(){
+	var ht=$('.add_del').html();
+	$('.add_del').html(ht+'<p>项目<input type="text" class="form-control num s1">&nbsp;价格<input type="text" class="form-control num s2">&nbsp;<button class="btn btn-md xdel">删除</button></p>');
+})
+	
+//保存
+$('.btn-success').click(function(){
+var sid=$('#ssel').val();
+var sid2=$('#ssel2').val();
+var hid=$('#hid').val();
+var title=$('#title').val();
+var about=$('#about').val();
+var price=$('#price').val();
+var photos=$('#photos').val();
+var have_num=$('#have_num').val();
+var sale_num=$('#sale_num').val();
+var send_time=$('#send_time').val();
+var goods_code=$('#goods_code').val();
+var discount=$('#discount').val();
+var collect_num=$('#collect_num').val();
+var ping_num=$('#ping_num').val();
+
+$('.s1').each(function(){
+	var arr=new Array();
+	arr.push($(this).val())
+	
+});
+
+if(sid==''||sid2==''){
+	alert('请选择分类！');
+	return false;
+}
+
+$.post('goods_post.php',{hid:hid,sid:sid,sid2:sid2,title:title,about:about,price:price,have_num:have_num,sale_num:sale_num,send_time:send_time,goods_code:goods_code,discount:discount,collect_num:collect_num,ping_num:ping_num},function(data){
+	if(data==1){
+		$.get('goods.php',function(data){
+			$('#admin_show').html(data);
+		})
+	}else{
+		alert('增加失败！');
+		return false;
+	}
+});	
+
+
+});
+
+
+
+
+
+
+</script>

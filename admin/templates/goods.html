@@ -1,0 +1,125 @@
+<div id="list_box">
+<div class="list">
+  	<h3>商品列表 <span id="add_user">增加商品</span></h3>	 	
+    <!--<div class="ed_sort">
+		汽车品牌：<select name="" id="sel2">
+  					<option value="0">汽车品牌</option>
+  				 </select>
+  		&nbsp;&nbsp;商品名称：<input type="text" id="sname" placeholder="请输入商品名称" /><input type="hidden" name="hid" id="hid" value="0"/>
+  		&nbsp;&nbsp;<input type="button" id="btn" value="搜索" />
+  	</div>-->
+    <table class="table table-hover">    	
+    <thead>
+	  <tr><th>ID</th><th>汽车品牌</th><th>车型</th><th>车龄（年）</th><th>总行程（wkm）</th><th>档型（手、自动挡）</th><th>上牌时间</th><th>价格(w)</th><th>简介</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$goods item=i}>
+		  <tr>
+		  	<td><{$i.id}></td>
+		  	<td><{$sort_goods[$i.sort_id]}></td>
+		  	<td><{$i.car_type}></td>
+		  	<td><{$i.car_age}></td>
+		  	<td><{$i.all_go}></td>
+		  	<td><{$i.car_stall}></td>
+		  	<td><{$i.up_plate_time}></td>
+		  	<td><{$i.price}></td>
+		  	<td><{$i.about}></td>
+		  	<td>
+		  		<a href="javascript:void(0)" edit-id="<{$i.id}>" class="btn btn-info btn-xs edit">编辑</a>&nbsp;
+		  		<a href="javascript:void(0)" del-id="<{$i.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>
+		  	</td>
+		  </tr>	
+	  <{/foreach}>
+	  	  <tr id="bb">
+	   	   <td colspan="12">
+	  		<ul class="pagination pagination-sm">
+	  			<li><a href="javascript:void(0)" class="page" page-data="1">首页</a></li>
+	  			<{if $prev_page<1}>
+			   		<li><a href="javascript:void(0)">&laquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$prev_page}>">&laquo;</a></li>
+			    <{/if}>
+			    <{section name=sn loop=$all_page}>
+			    	<{if $page==$smarty.section.sn.index+1}>
+			    		<li><a href="javascript:void(0)" class="page" id="bg_color" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			    		<{else}>
+			    		<li><a href="javascript:void(0)" class="page" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			   		<{/if}>
+			    
+			    <{/section}>
+			    	<{if $next_page > $all_page}>
+			   		<li><a href="javascript:void(0)">&raquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$next_page}>">&raquo;</a></li>
+			    <{/if}>
+			    <li><a href="javascript:void(0)" class="page" page-data="<{$all_page}>">末页</a></li>
+			</ul>
+	  	  </td>
+	   </tr>
+	  </tbody>
+</table>
+</div>
+</div>
+
+<script type="text/javascript">
+//二级分类搜索
+/*function fun(sid){
+	$('#sel2').html("")
+	var url='goods_post.php?sid='+sid; 
+	$.get(url,function(data){
+		var data=eval('('+data+')');
+		for(n in data){
+			var ht=$('#sel2').html();
+			var name=data[n]['name'];
+			var id=data[n]['id'];
+			console.log($(this))
+			$('#sel2').html(ht+"<option value="+id+">"+name+"</option>");
+		};
+	});
+};*/
+
+//分页
+$('.page').click(function(){
+	var page=$(this).attr('page-data');
+	$.get('goods.php',{page:page},function(data){
+		$('#list_box').html(data);
+	})
+})
+
+
+//编辑
+$('.edit').click(function(){
+	var ed_id=$(this).attr('edit-id');
+	$.get('goods_form.php',{id:ed_id},function(data){
+		//document.write(data);
+		$('#list_box').html(data);
+	})
+	 
+});
+
+//增加
+$('#add_user').click(function(){
+	$("input:not(input[type='button'])").val('');
+	$.get('goods_form.php',function(data){
+		$('#list_box').html(data);
+	})
+	return false;
+});
+
+//删除
+$('.del').on('click', function () {	 
+	var aa=$(this).parent().parent();
+	var del_id=$(this).attr('del-id');
+    $.confirm({
+        title:'提示',
+        content:'确定删除吗？',
+        animation: 'rotateXR',
+        closeAnimation: 'rotateX',
+        confirm: function(){          
+ 			$.get('goods_post.php',{del_id:del_id},function(data){						
+			});
+			aa.remove();
+        }
+    });
+});
+</script>

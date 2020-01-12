@@ -1,0 +1,107 @@
+<div class="form" id="noz">	
+<h3>增加/编辑</h3>
+<form id="myform" enctype="multipart/form-data">
+ <table>			
+	<input type="hidden" name="hid" id="hid" value="<{$ed_list.id}>" />
+	<tr><td>用户名：</td><td><input type="text" class="form-control" id="name" name="user" value="<{$ed_list.user}>"></td></tr>
+	<tr><td>头像：</td>
+		<td>
+			<input type="file" class="form-control" id="file" name="photo">
+			<img src="/upload/admin/<{$ed_list.photo}>?<{rand(1,999)}>" class="ed_img"/>
+			<input type="hidden" name="old_photo" value="<{$ed_list.photo}>">
+		</td>
+	</tr>
+    <tr><td>密码：</td>
+		<td>
+			<input type="password" class="form-control" name="pwd" id="pwd">
+			<input type="hidden" name="old_pwd" id="old_pwd" value="<{$ed_list.pwd}>">
+		</td>
+	</tr>
+    <tr><td>确认密码：</td><td><input type="password" class="form-control" id="pwd2"></td></tr>
+    <tr><td></td><td><input type="button" value="保存" class="btn btn-success btn-xs"/>&nbsp;<input type="button" value="返回" id="return" class="btn btn-inverse btn-xs"/></td></tr>
+</table>
+</form>
+</div>
+<script type="text/javascript">
+/*头像上传预览*/
+$("#file").change(function(){
+	var objUrl = getObjectURL(this.files[0]) ;
+	 //console.log("objUrl = "+objUrl) ;
+	if (objUrl) {
+		$(this).siblings(".ed_img").attr("src", objUrl) ;
+	}
+})
+//建立一個可存取到該file的url
+function getObjectURL(file) {
+	var url = null ;
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+
+//返回按钮
+$('#return').click(function(){
+	$.get('admin.php',function(data){
+		$("#admin_show").html(data);
+	})
+});
+
+//保存
+$('.btn-success').click(function(){
+	$("#myform").ajaxSubmit({
+        url:"admin_post.php",
+        type:"POST",
+        success:function(data){
+        	//document.write(data);
+          if(data==1){
+			$.get('admin.php',function(data){
+				$('#admin_show').html(data);
+			});
+			}else{	
+				//alert('增加失败！');
+				return false;
+			}
+       	 },
+        error:function(msg){
+          alert("error:"+msg);
+        }
+     });
+	var hid=$('#hid').val();
+	if(hid > 0)
+	var user=$('#name').val();
+	var photo=$('#photo').val();
+	return false;
+	var pwd=$('#pwd').val();
+	var pwd2=$('#pwd2').val();
+	var old_pwd = $("#old_pwd").val();
+	var old_photo = $("#old_photo").val();
+	if(user==''|| pwd==''){
+		alert('用户名或密码不能为空！');
+		return false;
+	}
+	if(pwd != pwd2){
+		alert('输入密码不一致！');
+		return false;
+	}
+	
+	$.post('admin_post.php',{hid:hid,user:user,photo:photo,pwd:pwd, old_pwd: old_pwd, old_photo: old_photo},function(data){
+		//document.write(data);
+		if(data==1){			
+			$.get('admin.php',function(data){
+				$('#admin_show').html(data);
+			});
+
+		}else{	
+			alert('增加失败！');
+			return false;
+		}
+	});
+});
+
+	
+</script>

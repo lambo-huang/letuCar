@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乐途汽车，乐在途中</title>
+    <link rel="stylesheet" href="/common/AmazeUI-2.7.2/assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="/css/header_footer.css">
+    <link rel="stylesheet" href="/css/about_us.css">
+    <script src="/js/plugin/require.js" data-main="/js/about_us_config"></script>
+</head>
+<body>
+<{include file = "header.html"}>
+<div class="main">
+    <h1>关于我们</h1>
+    <p>乐途汽车公司成立于2015年，以“乐途汽车 乐在途中”为宗旨，为消费者提供优质的产品，舒适的服务。真正做的让消费者，购得开心，用得放心。产品全面，价格透明。全年365天无假日，欢迎您前来选购</p>
+    <p>目前，乐途汽车品牌种类多，高档、中低档轿车，价格合理。方便消费者选择。</p>
+    <p><strong>公司地址：</strong>贵州省 黔西南布依族苗族州 兴义市桔山大道 乐途精品二手车批发城</p>
+    <p><strong>联系我们：</strong>黄总 15519998777 &nbsp;&nbsp;&nbsp;  刘总 15519950555</p>
+    <div class="letu_active">乐途动态</div>
+    <div class="imgs">
+        <{foreach from = $about_list key = k item = v}>
+        <{if $k < 3}>
+        <div class="img_box clear_fl">
+            <div class="img">
+                <img src="/upload/ad_list/<{$v.photo}>?<{rand(0,999)}>">
+            </div>
+            <div class="active_title"><{$v.about}></div>
+        </div>
+        <{/if}>
+        <{/foreach}>
+    </div>
+    <div class="imgs">
+        <{foreach from = $about_list key = k item = v}>
+        <{if 2 < $k &&  $k< 6}>
+        <div class="img_box clear_fl">
+            <div class="img">
+                <img src="/upload/ad_list/<{$v.photo}>?<{rand(0,999)}>">
+            </div>
+            <div class="active_title"><{$v.about}></div>
+        </div>
+        <{/if}>
+        <{/foreach}>
+    </div>
+    <div class="imgs">
+        <{foreach from = $about_list key = k item = v}>
+        <{if 5 < $k &&  $k< 9}>
+        <div class="img_box clear_fl">
+            <div class="img">
+                <img src="/upload/ad_list/<{$v.photo}>?<{rand(0,999)}>">
+            </div>
+            <div class="active_title"><{$v.about}></div>
+        </div>
+        <{/if}>
+        <{/foreach}>
+    </div>
+
+
+    <!--<div class="imgs">
+        <div class="img_box clear_fl">
+            <div class="img">
+                <img src="/images/letu_active/luying1.jpg">
+            </div>
+            <div class="active_title">乐途汽车2016自驾野营</div>
+        </div>
+        <div class="img_box">
+            <div class="img">
+                <img src="/images/letu_active/luying5.png">
+            </div>
+            <div class="active_title">乐途汽车2016自驾野营</div>
+        </div>
+        <div class="img_box">
+            <div class="img">
+                <img src="/images/letu_active/luying4.png">
+            </div>
+            <div class="active_title">乐途汽车2016自驾野营</div>
+        </div>
+
+    </div>
+    <div class="imgs">
+        <div class="img_box clear_fl">
+            <div class="img">
+                <img src="/images/letu_active/letu.png">
+            </div>
+            <div class="active_title">乐途二手汽车</div>
+        </div>
+        <div class="img_box">
+            <div class="img">
+                <img src="/images/letu_active/biaoyu2.png">
+            </div>
+            <div class="active_title">乐途二手汽车</div>
+        </div>
+        <div class="img_box">
+            <div class="img">
+                <img src="/images/letu_active/biaoyu1.png">
+            </div>
+            <div class="active_title">乐途二手汽车</div>
+        </div>
+
+    </div>-->
+</div>
+<div style="clear:both"></div>
+<{include file = "footer.html"}>
+</body>
+</html>
